@@ -2,73 +2,57 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>AppCraft AI — Generate apps from ideas</title>
+<title>AppCraft — AI App Generator</title>
 <style>
-:root{--ink:#202438;--muted:#73798c;--purple:#6558e8;--line:#e6e7ef;--bg:#f7f8fc}
+:root{--ink:#202438;--muted:#70778a;--purple:#6558e8;--line:#e5e7ef;--bg:#f7f8fc}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 Inter,system-ui,Segoe UI,Arial,sans-serif}
-header{display:flex;justify-content:space-between;align-items:center;padding:18px clamp(18px,6vw,84px);background:#fff;border-bottom:1px solid var(--line)}
-.logo{font-weight:850;font-size:22px;letter-spacing:-.5px}.logo span{color:var(--purple)}nav{display:flex;gap:20px}a{color:inherit}nav a{text-decoration:none;color:#555b70;font-size:14px}
-.hero{text-align:center;padding:52px 20px 28px}.tag{display:inline-block;background:#eeecff;color:var(--purple);border-radius:30px;padding:7px 13px;font-size:13px;font-weight:750}
-h1{font-size:clamp(34px,5vw,56px);line-height:1.08;letter-spacing:-2px;margin:18px 0 12px}.hero p{max-width:650px;margin:auto;color:var(--muted);font-size:17px}
-.layout{max-width:1180px;margin:22px auto 64px;padding:0 20px;display:grid;grid-template-columns:minmax(290px,400px) minmax(0,1fr);gap:18px}
+header{background:white;border-bottom:1px solid var(--line);padding:18px clamp(18px,6vw,86px);display:flex;justify-content:space-between;align-items:center}
+.logo{font-weight:850;font-size:22px}.logo span{color:var(--purple)}nav{display:flex;gap:20px}nav a{font-size:14px;text-decoration:none;color:#555b70}
+.hero{text-align:center;padding:48px 20px 25px}.tag{background:#eeecff;color:var(--purple);font-weight:750;font-size:13px;padding:7px 13px;border-radius:30px;display:inline-block}
+h1{font-size:clamp(35px,5vw,56px);line-height:1.08;letter-spacing:-2px;margin:18px 0 12px}.hero p{max-width:650px;margin:auto;color:var(--muted);font-size:17px}
+.layout{max-width:1180px;margin:24px auto 58px;padding:0 20px;display:grid;grid-template-columns:minmax(290px,410px) minmax(0,1fr);gap:18px}
 .panel{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 10px 35px #242b4809}
 h2{font-size:20px;margin:0 0 8px}.muted{color:var(--muted);font-size:14px;margin:0 0 18px}
-label{display:block;font-weight:700;font-size:13px;margin:15px 0 7px}
-textarea,input,select{width:100%;font:inherit;border:1px solid #dfe1eb;border-radius:10px;padding:12px;color:var(--ink);background:#fff}
-textarea{min-height:150px;resize:vertical}textarea:focus,input:focus,select:focus{outline:3px solid #6558e822;border-color:var(--purple)}
-button{font:inherit;font-weight:700;border:0;border-radius:10px;padding:12px 15px;cursor:pointer}
-.primary{background:var(--purple);color:#fff}.primary:hover{background:#5144d2}.secondary{background:#f0f1f6;color:#41475b}
-.row{display:flex;gap:9px;flex-wrap:wrap;margin-top:15px}.row button{flex:1}
-.status{font-size:13px;color:var(--muted);min-height:22px;margin-top:12px}.status.error{color:#b42318}
-.previewHead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}.previewHead h2{margin:0}
-.previewFrame{width:100%;height:590px;border:1px solid var(--line);border-radius:12px;background:white}
-.placeholder{height:590px;border:1px dashed #d7d9e5;border-radius:12px;display:grid;place-items:center;text-align:center;padding:28px;color:var(--muted)}
-.tip{background:#f5f4ff;border-radius:12px;padding:13px;font-size:13px;color:#55516f;margin-top:14px}
+label{display:block;font-weight:700;font-size:13px;margin:15px 0 7px}textarea,select,input{width:100%;font:inherit;border:1px solid #dfe1eb;border-radius:10px;padding:12px;background:#fff;color:var(--ink)}textarea{min-height:170px;resize:vertical}textarea:focus,select:focus,input:focus{outline:3px solid #6558e822;border-color:var(--purple)}
+button{font:inherit;font-weight:700;border:0;border-radius:10px;padding:12px 15px;cursor:pointer}.primary{background:var(--purple);color:white}.primary:hover{background:#5144d2}.secondary{background:#f0f1f6;color:#41475b}.row{display:flex;gap:9px;flex-wrap:wrap;margin-top:15px}.row button{flex:1}.status{font-size:13px;color:var(--muted);min-height:22px;margin-top:12px}.error{color:#b42318}
+.previewHead{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}.previewHead h2{margin:0}.previewFrame{width:100%;height:590px;border:1px solid var(--line);border-radius:12px;background:white}.placeholder{height:590px;border:1px dashed #d7d9e5;border-radius:12px;display:grid;place-items:center;text-align:center;padding:28px;color:var(--muted)}
+.hint{background:#f5f4ff;border-radius:12px;padding:13px;font-size:13px;color:#55516f;margin-top:14px}
 .learn{max-width:1140px;margin:0 auto 55px;padding:0 20px}.learnbox{background:#202438;color:white;border-radius:18px;padding:26px;display:flex;align-items:center;justify-content:space-between;gap:20px}.learnbox p{color:#c7cada;margin:6px 0 0}.learnbox a{display:inline-block;background:#a99fff;color:#202438;text-decoration:none;font-weight:800;padding:12px 16px;border-radius:10px;white-space:nowrap}
 footer{text-align:center;color:#888da0;padding:22px;font-size:13px}
-@media(max-width:850px){.layout{grid-template-columns:1fr}.previewFrame,.placeholder{height:520px}.learnbox{align-items:flex-start;flex-direction:column}}@media(max-width:520px){header{align-items:flex-start;flex-direction:column;gap:12px}.previewFrame,.placeholder{height:440px}}
+@media(max-width:850px){.layout{grid-template-columns:1fr}.previewFrame,.placeholder{height:520px}.learnbox{align-items:flex-start;flex-direction:column}}@media(max-width:520px){header{align-items:flex-start;flex-direction:column;gap:12px}nav{gap:15px}.previewFrame,.placeholder{height:440px}}
 </style>
 </head>
 <body>
-<header><div class="logo">App<span>Craft AI</span></div><nav><a href="#builder">Build an app</a><a href="#learn">Learn UX</a></nav></header>
-<section class="hero"><span class="tag">Your idea → a working prototype</span><h1>Describe it. Generate it. Try it.</h1><p>Tell AI what you want your app to do. Preview the generated app, refine it, and download a standalone HTML file.</p></section>
+<header><div class="logo">App<span>Craft</span></div><nav><a href="#builder">Build an app</a><a href="#learn">UX principles</a></nav></header>
+<section class="hero"><span class="tag">Your idea → your app</span><h1>Describe it. Build it. Try it.</h1><p>Explain what you want in plain language. AI generates a working web-app prototype you can preview and download.</p></section>
 <main class="layout" id="builder">
-<section class="panel">
-<h2>Describe your app</h2><p class="muted">Be specific about users, features, and the look you want.</p>
-<label for="idea">Your app idea</label><textarea id="idea" placeholder="Example: Build a friendly study planner for students. Let me add subjects and tasks, mark tasks complete, and see weekly progress. Use a calm purple and cream design."></textarea>
-<label for="style">Design style</label><select id="style"><option>Choose a style based on my idea</option><option>Minimal and clean</option><option>Playful and colorful</option><option>Professional dashboard</option><option>Warm and cozy</option><option>Bold and modern</option></select>
-<label for="extra">Extra instructions (optional)</label><input id="extra" placeholder="e.g. Make it mobile-first; include dark mode">
-<div class="row"><button class="primary" id="generate">Generate app</button><button class="secondary" id="refine" disabled>Improve prompt</button></div>
-<div class="status" id="status" aria-live="polite"></div>
-<div class="tip">Generated code runs in a sandboxed preview. Check it before downloading; AI-generated code may need refinement.</div>
+<section class="panel"><h2>Tell us what to build</h2><p class="muted">Describe the audience, key features, and visual style. More detail helps.</p>
+<label for="idea">App requirements</label><textarea id="idea" maxlength="12000" placeholder="Example: Make a study planner for students. Users can add subjects and tasks, mark tasks done, and see weekly progress. Use a calm purple and cream palette."></textarea>
+<label for="style">Design direction</label><select id="style"><option>Choose a style that fits the app</option><option>Minimal and clean</option><option>Playful and colorful</option><option>Professional dashboard</option><option>Warm and cozy</option><option>Bold and modern</option></select>
+<label for="extra">Additional requirements (optional)</label><input id="extra" maxlength="2500" placeholder="Mobile-first, dark mode, local saving…">
+<div class="row"><button class="primary" id="generate">Generate app</button><button class="secondary" id="improve">Improve my description</button></div>
+<div class="status" id="status" aria-live="polite"></div><div class="hint">UX approach: clear choices, visible progress, familiar controls, and a preview before download. AI-generated code is a prototype—review it before using real data.</div>
 </section>
-<section class="panel">
-<div class="previewHead"><h2>Live preview</h2><div class="row" style="margin:0"><button class="secondary" id="download" disabled>Download HTML</button></div></div>
-<div id="preview" class="placeholder">Your generated app will appear here.<br>Describe what you want and select <b>Generate app</b>.</div>
-</section>
+<section class="panel"><div class="previewHead"><h2>App preview</h2><button class="secondary" id="download" disabled>Download HTML</button></div><div id="preview" class="placeholder">Your generated app appears here.<br>Describe your idea and click <b>Generate app</b>.</div></section>
 </main>
-<section class="learn" id="learn"><div class="learnbox"><div><h2>Design with people in mind</h2><p>Explore UX principles that can make your app easier to understand and use.</p></div><a href="https://lawsofux.com/" target="_blank" rel="noopener noreferrer">Explore Laws of UX ↗</a></div></section>
-<footer>AppCraft AI · Generated apps are prototypes; review before using with real data.</footer>
+<section class="learn" id="learn"><div class="learnbox"><div><h2>Design with people in mind</h2><p>Explore psychology-backed UX principles to make your app clearer and easier to use.</p></div><a href="https://lawsofux.com/" target="_blank" rel="noopener noreferrer">Explore Laws of UX ↗</a></div></section>
+<footer>AppCraft · AI-generated prototypes · Review before production use</footer>
 <script>
-const idea=document.querySelector("#idea"),style=document.querySelector("#style"),extra=document.querySelector("#extra");
-const generate=document.querySelector("#generate"),refine=document.querySelector("#refine"),download=document.querySelector("#download");
-const statusEl=document.querySelector("#status"),preview=document.querySelector("#preview");
-let currentHTML="";
-function showStatus(msg,error=false){statusEl.textContent=msg;statusEl.className="status"+(error?" error":"");}
-function setPreview(html){preview.className="";preview.innerHTML="";const frame=document.createElement("iframe");frame.className="previewFrame";frame.title="Generated application preview";frame.setAttribute("sandbox","allow-scripts");frame.srcdoc=html;preview.appendChild(frame);}
-generate.addEventListener("click",async()=>{
- const description=idea.value.trim();if(!description){showStatus("Describe your app first.",true);return}
- generate.disabled=true;download.disabled=true;refine.disabled=true;showStatus("AI is designing and building your app…");
+const $=s=>document.querySelector(s),idea=$("#idea"),style=$("#style"),extra=$("#extra");
+let generated="";
+function status(message,error=false){$("#status").textContent=message;$("#status").className="status"+(error?" error":"")}
+$("#generate").addEventListener("click",async()=>{
+ const description=idea.value.trim();if(!description){status("Describe your app first.",true);return}
+ const button=$("#generate");button.disabled=true;$("#download").disabled=true;status("Generating your app… this can take a little while.");
  try{
-  const res=await fetch("/api/generate",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({idea:description,style:style.value,extra:extra.value})});
-  const data=await res.json();if(!res.ok)throw new Error(data.error||"Generation failed");
-  currentHTML=data.html;setPreview(currentHTML);download.disabled=false;refine.disabled=false;showStatus("App generated. Try it in the preview, then download the HTML.");
- }catch(err){showStatus(err.message+" Make sure the AppCraft server is running and your API key is configured.",true)}
- finally{generate.disabled=false}
+  const response=await fetch("/api/generate",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({idea:description,style:style.value,extra:extra.value})});
+  const data=await response.json();if(!response.ok)throw new Error(data.error||"Generation failed");
+  generated=data.html;const frame=document.createElement("iframe");frame.className="previewFrame";frame.title="Generated app preview";frame.setAttribute("sandbox","allow-scripts");frame.srcdoc=generated;
+  $("#preview").className="";$("#preview").replaceChildren(frame);$("#download").disabled=false;status("Ready! Test the preview, then download the standalone HTML.");
+ }catch(e){status(e.message||"Something went wrong. Try again.",true)}
+ finally{button.disabled=false}
 });
-refine.addEventListener("click",()=>{idea.value=idea.value+"\n\nPlease improve the app with a polished responsive layout, clear navigation, useful empty states, accessible controls, and fully working interactions. Keep all data local in the browser.";showStatus("Prompt improved. Select Generate app to rebuild.");});
-download.addEventListener("click",()=>{
- if(!currentHTML)return;const blob=new Blob([currentHTML],{type:"text/html;charset=utf-8"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download="appcraft-generated-app.html";a.click();setTimeout(()=>URL.revokeObjectURL(url),1500);
-});
+$("#improve").addEventListener("click",()=>{if(!idea.value.trim()){idea.value="Create a useful, polished app for the user’s stated goal. Include the core workflow, responsive layout, accessible controls, empty states, and working interactions. Save data locally when appropriate."; }else{idea.value += "\nPlease make the app complete and polished: include the core workflow, responsive layout, accessible controls, helpful empty states, and working interactions. Save data locally when appropriate."}status("Description updated. Generate the app to apply it.")});
+$("#download").addEventListener("click",()=>{if(!generated)return;const url=URL.createObjectURL(new Blob([generated],{type:"text/html;charset=utf-8"}));const a=document.createElement("a");a.href=url;a.download="my-generated-app.html";a.click();setTimeout(()=>URL.revokeObjectURL(url),1500)});
 </script>
 </body></html>

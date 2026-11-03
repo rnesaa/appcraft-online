@@ -1,28 +1,20 @@
-# AppCraft AI
+# AppCraft Online
 
-A local web app that uses the OpenAI Responses API to generate standalone HTML apps from natural-language descriptions.
+A Vercel-ready AI app generator. Users describe an app; a serverless API calls the OpenAI Responses API and returns a standalone HTML prototype for preview and download.
 
-## Requirements
-- Node.js 20 or newer
-- An OpenAI API key with API access/billing enabled
+## Deploy online (no local Node.js needed)
+1. Create a GitHub account if you do not have one.
+2. Create a new repository and upload the contents of this folder.
+3. Sign in to Vercel and choose **Add New → Project**; import that GitHub repository.
+4. In the Vercel project settings, add an Environment Variable:
+   - Name: `OPENAI_API_KEY`
+   - Value: your OpenAI API key
+5. Optionally add `OPENAI_MODEL` with a model available to your API account. The default is `gpt-4.1-mini`.
+6. Deploy. Open the Vercel URL.
 
-## Setup
-1. Unzip this project.
-2. Open a terminal in the `AppCraft-AI` folder.
-3. Copy `.env.example` to `.env`.
-4. Put your API key after `OPENAI_API_KEY=` in `.env`. Keep this file private; never upload it or share it.
-5. Run:
-   ```bash
-   npm install
-   npm start
-   ```
-6. Open http://localhost:3000 in your browser.
+The API key is kept server-side in Vercel's environment variables; it is not embedded in the public website.
 
-## Use
-Describe the app, choose a design style, and click **Generate app**. Test it in the preview, then click **Download HTML**. The downloaded app is a standalone prototype.
-
-## Publish a generated app
-For a static app, save the downloaded file as `index.html`, put it in a folder, and deploy that folder using a static host such as Netlify Drop. Apps requiring accounts, shared databases, payments, or other server-side features need a backend and are not provided by a standalone HTML file.
-
-## Security
-The API key is used only by `server.js` on your computer and is never sent to the browser. Generated code is shown in a sandboxed iframe, but AI-generated code should still be reviewed before use. Do not use generated prototypes with sensitive or production data without proper security review.
+## Notes
+- OpenAI API access and billing are separate from ChatGPT subscriptions.
+- Generated apps are standalone HTML prototypes. Apps requiring authentication, shared data, or server-side functionality need additional backend work.
+- Review generated code before using it with real users or sensitive data.
